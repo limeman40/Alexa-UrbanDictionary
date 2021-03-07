@@ -1,0 +1,12 @@
+lookup {Term}
+to define {Term}
+define {Term}
+what's a {Term}
+what's an {Term}
+what's the meaning of {Term}
+what's the meaning of a {Term}
+what's the meaning of an {Term}
+what does {Term} mean
+what a {Term} is
+what an {Term} is
+tell me about {Term}

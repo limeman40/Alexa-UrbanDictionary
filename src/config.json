@@ -1,0 +1,8 @@
+{
+  "defineTerm": "https://api.urbandictionary.com/v0/define?term=",
+  "randomTerm": "https://api.urbandictionary.com/v0/random",
+  "AutoCompleteExtra": "https://api.urbandictionary.com/v0/autocomplete-extra",
+  "AutoComplete":      "https://api.urbandictionary.com/v0/autocomplete",
+  "wordOfTheDay": "https://api.urbandictionary.com/v0/words_of_the_day",
+  "appId": "<addHere>"
+}

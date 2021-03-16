@@ -404,11 +404,8 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
-      const request = handlerInput.requestEnvelope.request;
-      return request.type === 'IntentRequest' &&
-            (request.intent.name === 'AMAZON.CancelIntent' ||
-              request.intent.name === 'AMAZON.StopIntent' ||
-              request.intent.name === 'AMAZON.NoIntent');
+     return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent';
     },
     handle(handlerInput) {
 

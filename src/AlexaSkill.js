@@ -85,7 +85,7 @@ const GetDefinationIntentHandler = {
 
                     aLikeDefineTerms = cleanDefinition.match(/(?<=\[)[^\]\[\r\n]*(?=\])/g);
 
-                    essionAttributes.definitions = data.list;
+                    sessionAttributes.definitions = data.list;
                     sessionAttributes.similarTerms = aLikeDefineTerms;
                     sessionAttributes.definitionPointer = 0;
                     sessionAttributes.random = false;
@@ -263,33 +263,24 @@ const WordOfTheDayHandler = {
       } // End HandlerInput
   };
 
-const NoIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-            Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent';
-    },
-    handle(handlerInput) {
+  const NoIntentHandler = {
+      canHandle(handlerInput) {
+          return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+              Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent';
+      },
+      async handle(handlerInput) {
 
-      const { attributesManager } = handlerInput;
-      const sessionAttributes = attributesManager.getSessionAttributes();
+     var speechOutput = startVoice + "Feel free to ask for another term. " + endVoice;
+     var repromptText = startVoice + "You can say things like define butt plug." + endVoice;
 
-      var similarTerms = sessionAttributes.similarTerms;
-      console.log("Similar Terms: " + similarTerms);
+     return handlerInput.responseBuilder
+      // Speak out the definition
+       .speak(speechOutput)
+       .reprompt(repromptText)
+       .getResponse()
 
-      if (Array.isArray(similarTerms) && similarTerms.length > 0) {
-          var speechOutput = startVoice + "Before you go, here is a list of terms that you might be interested in: " + similarTerms.join(',') + endVoice;
-
-          return handlerInput.responseBuilder
-          // Speak out like terms
-          .speak(speechOutput)
-
-      } else {
-          return handlerInput.responseBuilder
-          // Speak out random goodbye
-          .speak(getGoodbye())
       }
-    } // End HandlerInput
-};
+  };
 
 const YesIntentHandler = {
     canHandle(handlerInput) {
@@ -413,15 +404,35 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-            (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent' ||
-                Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
+      const request = handlerInput.requestEnvelope.request;
+      return request.type === 'IntentRequest' &&
+            (request.intent.name === 'AMAZON.CancelIntent' ||
+              request.intent.name === 'AMAZON.StopIntent' ||
+              request.intent.name === 'AMAZON.NoIntent');
     },
     handle(handlerInput) {
-      const speakOutput = startVoice + getGoodbye() + endVoice;
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .getResponse();
+
+      const { attributesManager } = handlerInput;
+      const sessionAttributes = attributesManager.getSessionAttributes();
+
+      var similarTerms = sessionAttributes.similarTerms;
+      console.log("Similar Terms: " + similarTerms);
+
+      if (Array.isArray(similarTerms) && similarTerms.length > 0) {
+         var speechOutput = startVoice + "Before you go, here is a list of terms that you might be interested in: " + similarTerms.join(',') + endVoice;
+
+         return handlerInput.responseBuilder
+         // Speak out the definition
+         .speak(speechOutput)
+         .getResponse()
+     } else {
+       return handlerInput.responseBuilder
+       // Speak out the definition
+       .speak(getGoodbye())
+       .getResponse()
+     }
+
+
     } // End HandlerInput
 };
 /* *

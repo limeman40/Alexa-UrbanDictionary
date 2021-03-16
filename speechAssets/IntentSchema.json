@@ -14,15 +14,16 @@
                 },
                 {
                     "name": "AMAZON.HelpIntent",
-                    "samples": []
+                    "samples": [
+                        "help"
+                    ]
                 },
                 {
                     "name": "AMAZON.StopIntent",
                     "samples": [
-                        "quit",
+                        "done",
                         "stop",
-                        "exit",
-                        "cancel"
+                        "leave"
                     ]
                 },
                 {
@@ -30,20 +31,20 @@
                     "slots": [
                         {
                             "name": "Term",
-                            "type": "TERM"
+                            "type": "Term"
                         }
                     ],
                     "samples": [
-                        "lookup {Term}",
-                        "to define {Term}",
-                        "define {Term}",
-                        "what's a {Term}",
-                        "what's an {Term}",
-                        "what's the meaning of {Term}",
-                        "what's the meaning of a {Term}",
-                        "what's the meaning of an {Term}",
-                        "what does {Term} mean",
-                        "what a {Term} is",
+                        "GetDefinationIntent lookup {Term}",
+                        "GetDefinationIntent to define {Term}",
+                        "GetDefinationIntent define {Term}",
+                        "GetDefinationIntent what's a {Term}",
+                        "GetDefinationIntent what's an {Term}",
+                        "GetDefinationIntent what's the meaning of {Term}",
+                        "GetDefinationIntent what's the meaning of a {Term}",
+                        "GetDefinationIntent what's the meaning of an {Term}",
+                        "GetDefinationIntent what does {Term} mean",
+                        "GetDefinationIntent what a {Term} is",
                         "what an {Term} is",
                         "tell me about {Term}"
                     ]
@@ -57,24 +58,68 @@
                     "samples": []
                 },
                 {
+                    "name": "NumberOfTerms",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "{number}"
+                    ]
+                },
+                {
                     "name": "GetRandomDefination",
                     "slots": [],
                     "samples": [
-                        "tell me a random word",
-                        "give me a random word",
-                        "define a random word",
-                        "for a random word",
-                        "tell me a random term",
-                        "give me a random term",
-                        "define a random term",
-                        "for a random term"
+                        "GetRandomDefination tell me a random word",
+                        "GetRandomDefination give me a random word",
+                        "GetRandomDefination define a random word",
+                        "GetRandomDefination for a random word",
+                        "GetRandomDefination tell me a random term",
+                        "GetRandomDefination give me a random term",
+                        "GetRandomDefination define a random term",
+                        "GetRandomDefination for a random term"
+                    ]
+                },
+                {
+                    "name": "WordOfTheDay",
+                    "slots": [],
+                    "samples": [
+                        "WordOfTheDay for the word of the day",
+                        "WordOfTheDay what is the word of the day",
+                        "WordOfTheDay what's the word of the day",
+                        "WordOfTheDay what is today's word",
+                        "WordOfTheDay what's today's word"
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": [
+                        "you betcha",
+                        "sure",
+                        "yes"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": [
+                        "nope",
+                        "no thanks",
+                        "no"
                     ]
                 }
             ],
             "types": [
                 {
-                    "name": "TERM",
+                    "name": "Term",
                     "values": [
+                        {
+                            "name": {
+                                "value": "left handed cappuccino"
+                            }
+                        },
                         {
                             "name": {
                                 "value": "a"
@@ -14927,6 +14972,16 @@
                         },
                         {
                             "name": {
+                                "value": "tug"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tug boat"
+                            }
+                        },
+                        {
+                            "name": {
                                 "value": "V"
                             }
                         },
@@ -14938,11 +14993,6 @@
                         {
                             "name": {
                                 "value": "v card stamped"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "V&"
                             }
                         },
                         {
